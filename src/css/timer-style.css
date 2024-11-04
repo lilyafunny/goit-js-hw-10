@@ -1,4 +1,4 @@
-input {
+/*input {
     width: 272px;
     height: 40px;
     padding: 0 0 0 16px;
@@ -50,6 +50,11 @@ button:is(:hover, :focus) {
     background-color: #6C8CFF;
     color: #FFFFFF;
 }
+
+
+*/
+
+
 
 /*.flatpickr-day.selected {
     background-color: transparent !important;
