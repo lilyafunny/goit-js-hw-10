@@ -1,5 +1,7 @@
 import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
+import iziToast from "izitoast";
+import "izitoast/dist/css/iziToast.min.css";
 
 let userSelectedDate = null;
 let currentData = null;
@@ -22,10 +24,11 @@ const options = {
     defaultDate: new Date(),
     minuteIncrement: 1,
     onClose(selectedDates) {
-        console.log(selectedDates[0]);
-       /*-----*/ console.log(options.defaultDate);
         if (selectedDates[0] < options.defaultDate) {
-            window.alert("Please choose a date in the future");
+            iziToast.error({
+                message: `Please choose a date in the future`,
+                position: 'topRight'
+            });
         } else {
             btnStartEl.removeAttribute('disabled');
             userSelectedDate = selectedDates[0].getTime();
