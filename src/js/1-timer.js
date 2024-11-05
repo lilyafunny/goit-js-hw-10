@@ -18,6 +18,7 @@ btnStartEl.addEventListener('click', handlClickStart);
 btnStartEl.setAttribute('disabled', "");
 
 
+
 const options = {
     enableTime: true,
     time_24hr: true,
@@ -31,6 +32,8 @@ const options = {
             });
         } else {
             btnStartEl.removeAttribute('disabled');
+            inputEl.removeAttribute('disabled');
+
             userSelectedDate = selectedDates[0].getTime();
         }
     },
@@ -40,11 +43,15 @@ const options = {
 flatpickr(inputEl, options);
 
 function handlClickStart() {
+    btnStartEl.disabled = true;
+    inputEl.disabled = true;
+
     timerId = setInterval(() => {
         currentData = Date.now();
         const timer = userSelectedDate - currentData;
         if (timer <= 0) {
             clearInterval(timerId);
+            inputEl.removeAttribute('disabled');
         } else {
             updateTimer(convertMs(timer));
         }
@@ -52,10 +59,10 @@ function handlClickStart() {
 }
 
 function updateTimer({ days, hours, minutes, seconds }) {
-    daysEl.textContent = `${days}`;
-    hoursEl.textContent = `${hours}`;
-    minutesEl.textContent = `${minutes}`;
-    secondsEl.textContent = `${seconds}`;
+    daysEl.textContent = addLeadingZero(days);
+    hoursEl.textContent = addLeadingZero(hours);
+    minutesEl.textContent = addLeadingZero(minutes);
+    secondsEl.textContent = addLeadingZero(seconds);
 }
 
 function convertMs(ms) {
